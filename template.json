@@ -5,11 +5,11 @@
   "variables": [
     {
       "name": "pluginGroup",
-      "description": "Plugin Group"
+      "description": "Plugin group, such as org.jetbrains.plugins"
     },
     {
       "name": "pluginName",
-      "description": "Plugin Name"
+      "description": "Plugin name without space"
     }
   ],
   "files": [
