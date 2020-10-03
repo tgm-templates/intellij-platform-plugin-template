@@ -1,0 +1,18 @@
+{
+  "name": "intellij-platform-plugin",
+  "repository": "https://github.com/tgm-templates/intellij-platform-plugin-template",
+  "description": "IntelliJ Platform plugin template",
+  "variables": [
+    {
+      "name": "pluginGroup",
+      "description": "Plugin Group"
+    },
+    {
+      "name": "pluginName",
+      "description": "Plugin Name"
+    }
+  ],
+  "files": [
+    "settings.gradle.kts","gradle.properties"
+  ]
+}
