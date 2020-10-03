@@ -13,6 +13,6 @@
     }
   ],
   "files": [
-    "settings.gradle.kts","gradle.properties"
+    "settings.gradle.kts","gradle.properties","src/main/resources/META-INF/plugin.xml"
   ]
 }
