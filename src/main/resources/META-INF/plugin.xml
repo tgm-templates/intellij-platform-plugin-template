@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>org.jetbrains.plugins.template</id>
-    <name>Template</name>
+    <id>@pluginGroup@</id>
+    <name>@pluginName@</name>
     <vendor>JetBrains</vendor>
 
     <!-- Product and plugin compatibility requirements -->
