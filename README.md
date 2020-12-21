@@ -34,7 +34,9 @@ In this README, we will highlight the following elements of template-project cre
     - [Changelog maintenance](#changelog-maintenance) with the Gradle Changelog Plugin
     - [Release flow](#release-flow) using GitHub Releases
     - [Publishing the plugin](#publishing-the-plugin) with the Gradle IntelliJ Plugin
+- [FAQ](#faq)
 - [Useful links](#useful-links)
+
 
 ## Getting started
 
@@ -48,6 +50,9 @@ After using the template to create your blank project, the [Template Cleanup][fi
 
 For the last step, you have to manually review the configuration variables described in the [gradle.properties][file:gradle.properties] file and *optionally* move sources from the *com.github.username.repository* package to the one that works best for you. Then you can get to work implementing your ideas.
 
+> **TIP:** To use Java in your plugin, create the `/src/main/java` directory.
+
+
 ## Gradle configuration
 
 The recommended method for plugin development involves using the [Gradle][gradle] setup with the [gradle-intellij-plugin][gh:gradle-intellij-plugin] installed. The gradle-intellij-plugin makes it possible to run the IDE with your plugin and publish your plugin to the Marketplace Repository.
@@ -56,7 +61,7 @@ A project built using the IntelliJ Platform Plugin Template includes a Gradle co
 
 The most significant parts of the current configuration are:
 - Configuration written with [Gradle Kotlin DSL][gradle-kotlin-dsl].
-- Kotlin support, with the option to write Java code.
+- Support for Kotlin and Java implementation.
 - Integration with the [gradle-changelog-plugin][gh:gradle-changelog-plugin], which automatically patches the change notes and description based on the `CHANGELOG.md` and `README.md` files.
 - Integration with the [gradle-intellij-plugin][gh:gradle-intellij-plugin] for smoother development.
 - Code linting with [detekt][detekt].
@@ -91,6 +96,7 @@ kotlin.stdlib.default.dependency = false
 
 For more details, please see: [Dependency on the standard library][kotlin-docs-dependency-on-stdlib] in Kotlin documentation.
 
+
 ## Plugin template structure
 
 A generated IntelliJ Platform Plugin Template repository contains the following content structure:
@@ -112,11 +118,13 @@ A generated IntelliJ Platform Plugin Template repository contains the following 
 └── src                     Plugin sources
     └── main
         ├── kotlin/         Kotlin source files
-        ├── java/           Java source files
         └── resources/      Resources - plugin.xml, icons, messages
 ```
 
 In addition to the configuration files, the most crucial part is the `src` directory, which contains our implementation and the manifest for our plugin – [plugin.xml][file:plugin.xml].
+
+> **TIP:** To use Java in your plugin, create the `/src/main/java` directory.
+
 
 ## Plugin configuration file
 The plugin configuration file is a [plugin.xml][file:plugin.xml] file located in the `src/main/resources/META-INF` directory. It provides general information about the plugin, its dependencies, extensions, and listeners.
@@ -139,7 +147,8 @@ The plugin configuration file is a [plugin.xml][file:plugin.xml] file located in
 </idea-plugin>
 ```
 
-You can read more about this file in the [IntelliJ Platform SDK DevGuide][docs:plugin.xml].
+You can read more about this file in the [Plugin Configuration File][docs:plugin.xml] section of our documentation.
+
 
 ## Sample code
 
@@ -157,6 +166,11 @@ The prepared template provides as little code as possible because it is impossib
 
 These files are located in `src/main/kotlin`. This location indicates the language being used. So if you decide to use Java instead, sources should be located in the `src/main/java` directory.
 
+To start with the actual implementation, you may check our [IntelliJ Platform SDK DevGuide][docs], which contains an introduction to the essential areas of the plugin development together with dedicated tutorials.
+
+For those, who value example codes the most, there are also available [IntelliJ SDK Code Samples][gh:code-samples] and [IntelliJ Platform Explorer][jb:ipe] – a search tool for browsing Extension Points inside existing implementations of open-source IntelliJ Platform plugins.
+
+
 ## Predefined Run/Debug configurations
 
 Within the default project structure, there is a `.run` directory provided containing three predefined *Run/Debug configurations* that expose corresponding Gradle tasks:
@@ -168,6 +182,12 @@ Within the default project structure, there is a `.run` directory provided conta
 | Run Plugin         | Runs [`:runIde`][gh:gradle-intellij-plugin-running-dsl] Gradle IntelliJ Plugin task. Use the *Debug* icon for plugin debugging.                                        |
 | Run Tests          | Runs [`:check`][gradle-lifecycle-tasks] Gradle task that invokes `:test` and `detekt`/`ktlint` code inspections.                                                       |
 | Run Verifications  | Runs [`:runPluginVerifier`][gh:gradle-intellij-plugin-verifier-dsl] Gradle IntelliJ Plugin task to check the plugin compatibility against the specified IntelliJ IDEs. |
+
+
+> **TIP:** You can find the logs from the running task in the `idea.log` tab.
+> 
+> ![Run/Debug configuration logs][file:run-logs.png]
+
 
 ## Continuous integration
 
@@ -217,8 +237,7 @@ When you edit the draft and use the <kbd>Publish release</kbd> button, GitHub wi
 
 Releasing a plugin to the Marketplace is a straightforward operation that uses the `publishPlugin` Gradle task provided by the [gradle-intellij-plugin][gh:gradle-intellij-plugin]. The [Release](.github/workflows/release.yml) workflow automates this process by running the task when a new release appears in the GitHub Releases section.
 
-> **TIP**: Set a suffix to the plugin version to publish it in the custom repository channel, i.e. `v1.0.0-beta` will
-> push your plugin to the `beta` [release channel][docs:release-channel].
+> **TIP**: Set a suffix to the plugin version to publish it in the custom repository channel, i.e. `v1.0.0-beta` will push your plugin to the `beta` [release channel][docs:release-channel].
 
 The authorization process relies on the `PUBLISH_TOKEN` secret environment variable, which has to be acquired through the Secrets section of the repository Settings.
 
@@ -227,13 +246,36 @@ The authorization process relies on the `PUBLISH_TOKEN` secret environment varia
 You can get that token in the [My Tokens][jb:my-tokens] tab within your Marketplace profile dashboard.
 
 > **Important:**
-> Before using the automated deployment process, it is necessary to manually create a new plugin in the Marketplace
-> to specify options like the license, repository URL, etc. Please follow
-> the [Publishing a Plugin][docs:publishing] instructions.
+> Before using the automated deployment process, it is necessary to manually create a new plugin in the Marketplace to specify options like the license, repository URL, etc.
+> Please follow the [Publishing a Plugin][docs:publishing] instructions.
+
+
+## FAQ
+
+### How to use Java in my project?
+
+Java language is supported by default along with Kotlin.
+Initially, there's `/src/main/kotlin` directory available with some minimal examples.
+You can still replace it or add next to it the `/src/main/java` to start working with Java language instead.
+
+### How to disable tests or build job using the `[skip ci]` commit message?
+
+You can disable specific tests using the [`if`][github-actions-if] condition, like:
+
+```yaml
+jobs:
+  test:
+    name: Test
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+      ...
+```
+
 
 ## Useful links
 
 - [IntelliJ Platform SDK DevGuide][docs]
+- [IntelliJ Platform Explorer][jb:ipe]
 - [Marketplace Quality Guidelines][jb:quality-guidelines]
 - [IntelliJ Platform UI Guidelines][jb:ui-guidelines]
 - [Marketplace Paid Plugins][jb:paid-plugins]
@@ -256,6 +298,7 @@ You can get that token in the [My Tokens][jb:my-tokens] tab within your Marketpl
 [file:use-this-template.png]: .github/readme/use-this-template.png
 [file:draft-release.png]: .github/readme/draft-release.png
 [file:gradle.properties]: ./gradle.properties
+[file:run-logs.png]: .github/readme/run-logs.png
 [file:plugin.xml]: ./src/main/resources/META-INF/plugin.xml
 [file:run-debug-configurations.png]: .github/readme/run-debug-configurations.png
 [file:settings-secrets.png]: .github/readme/settings-secrets.png
@@ -273,6 +316,7 @@ You can get that token in the [My Tokens][jb:my-tokens] tab within your Marketpl
 [jb:confluence-on-gh]: https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub
 [jb:download-ij]: https://www.jetbrains.com/idea/download
 [jb:forum]: https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development
+[jb:ipe]: https://plugins.jetbrains.com/intellij-platform-explorer
 [jb:my-tokens]: https://plugins.jetbrains.com/author/me/tokens
 [jb:paid-plugins]: https://plugins.jetbrains.com/docs/marketplace/paid-plugins-marketplace.html
 [jb:quality-guidelines]: https://plugins.jetbrains.com/docs/marketplace/quality-guidelines.html
@@ -282,6 +326,7 @@ You can get that token in the [My Tokens][jb:my-tokens] tab within your Marketpl
 
 [keep-a-changelog]: https://keepachangelog.com
 [detekt]: https://detekt.github.io/detekt
+[github-actions-if]: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-expression-in-an-if-conditional
 [gradle]: https://gradle.org
 [gradle-kotlin-dsl]: https://docs.gradle.org/current/userguide/kotlin_dsl.html
 [gradle-lifecycle-tasks]: https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks

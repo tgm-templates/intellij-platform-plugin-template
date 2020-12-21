@@ -3,9 +3,33 @@
 # IntelliJ Platform Plugin Template Changelog
 
 ## [Unreleased]
+### Added
+
 ### Changed
-- build.gradle.kts: simpler syntax for configuring `KotlinCompile`
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [0.8.0]
+### Added
+- Dependabot integration
+- Show `idea.log` logs of the run IDE in the Run console
+- README: FAQ section
+
+### Changed
+- `build.gradle.kts`: simpler syntax for configuring `KotlinCompile`
 - Dependencies - upgrade `org.jetbrains.kotlin.jvm` to `1.4.21`
+- Dependencies - upgrade `detekt-formatting` to `1.15.0`
+- Dependencies - upgrade `io.gitlab.arturbosch.detekt` to `1.15.0`
+- README: Clarify the Java usage in the project
+- `pluginVerifierIdeVersions` - upgrade to `2020.1.4, 2020.2.3, 2020.3.1`
+
+### Fixed
+- Return `Supplier<@Nls String>` instead of `String` in `MyBundle.messagePointer`
 
 ## [0.7.1]
 ### Changed
