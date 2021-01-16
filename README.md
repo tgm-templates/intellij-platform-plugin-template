@@ -19,8 +19,12 @@ If you're still not quite sure what this is all about, read our introduction: [W
 
 > **TIP**: Click the <kbd>Watch</kbd> button on the top to be notified about releases containing new features and fixes.
 
+
+### Table of contents
+
 In this README, we will highlight the following elements of template-project creation:
 
+- [Getting started](#getting-started)
 - [Gradle configuration](#gradle-configuration)
 - [Plugin template structure](#plugin-template-structure)
     - [Dependency on the Kotlin standard library](#dependency-on-the-kotlin-standard-library)
@@ -31,6 +35,7 @@ In this README, we will highlight the following elements of template-project cre
     - actions – basic action with shortcut binding
 - [Predefined Run/Debug configurations](#predefined-rundebug-configurations)
 - [Continuous integration](#continuous-integration) based on GitHub Actions
+    - [Dependencies management](#dependencies-management) with dependabot
     - [Changelog maintenance](#changelog-maintenance) with the Gradle Changelog Plugin
     - [Release flow](#release-flow) using GitHub Releases
     - [Publishing the plugin](#publishing-the-plugin) with the Gradle IntelliJ Plugin
@@ -127,6 +132,7 @@ In addition to the configuration files, the most crucial part is the `src` direc
 
 
 ## Plugin configuration file
+
 The plugin configuration file is a [plugin.xml][file:plugin.xml] file located in the `src/main/resources/META-INF` directory. It provides general information about the plugin, its dependencies, extensions, and listeners.
 
 ```xml
@@ -214,6 +220,19 @@ In the `.github/workflows` directory, you can find definitions for the following
     - Removes redundant files.
 
 All the workflow files have accurate documentation, so it's a good idea to take a look through their sources.
+
+### Dependencies management
+
+This Template project depends on Gradle plugins and external libraries – and during the development, you will add more of them.
+
+Keeping the project in good shape and having all the dependencies up-to-date requires time and effort, but it is possible to automate that process using [dependabot][gh:dependabot].
+
+Dependabot is a bot provided by GitHub for checking the build configuration files and reviewing any outdated or insecure dependencies of yours – in case if any update is available, it creates a new pull request providing [the proper change][gh:dependabot-pr].
+
+> **Note:** Dependabot doesn't yet support checking of the Gradle Wrapper. Check the [Gradle Releases][gradle-releases] page and update it with:
+> ```bash
+> ./gradlew wrapper --gradle-version 6.8
+> ```
 
 ### Changelog maintenance
 
@@ -305,6 +324,7 @@ jobs:
 [file:template_cleanup.yml]: ./.github/workflows/template-cleanup.yml
 
 [gh:actions]: https://help.github.com/en/actions
+[gh:dependabot]: https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/keeping-your-dependencies-updated-automatically
 [gh:code-samples]: https://github.com/JetBrains/intellij-sdk-code-samples
 [gh:gradle-changelog-plugin]: https://github.com/JetBrains/gradle-changelog-plugin
 [gh:gradle-intellij-plugin]: https://github.com/JetBrains/gradle-intellij-plugin
@@ -312,6 +332,7 @@ jobs:
 [gh:gradle-intellij-plugin-verifier-dsl]: https://github.com/JetBrains/gradle-intellij-plugin#plugin-verifier-dsl
 [gh:releases]: https://github.com/JetBrains/intellij-platform-plugin-template/releases
 [gh:build]: https://github.com/JetBrains/intellij-platform-plugin-template/actions?query=workflow%3ABuild
+[gh:dependabot-pr]: https://github.com/JetBrains/intellij-platform-plugin-template/pull/73
 
 [jb:confluence-on-gh]: https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub
 [jb:download-ij]: https://www.jetbrains.com/idea/download
@@ -328,6 +349,7 @@ jobs:
 [detekt]: https://detekt.github.io/detekt
 [github-actions-if]: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-expression-in-an-if-conditional
 [gradle]: https://gradle.org
+[gradle-releases]: https://gradle.org/releases
 [gradle-kotlin-dsl]: https://docs.gradle.org/current/userguide/kotlin_dsl.html
 [gradle-lifecycle-tasks]: https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks
 [kotlin-docs-dependency-on-stdlib]: https://kotlinlang.org/docs/reference/using-gradle.html#dependency-on-the-standard-library

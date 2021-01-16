@@ -3,17 +3,22 @@
 # IntelliJ Platform Plugin Template Changelog
 
 ## [Unreleased]
+### Changed
+- Use `-bin` distribution of the Gradle Wrapper
+
+## [0.8.1]
 ### Added
+- README: Dependencies management section
 
 ### Changed
-
-### Deprecated
-
-### Removed
+- Upgrade Gradle Wrapper to `6.8`
+- Dependencies - upgrade `org.jetbrains.changelog` to `1.0.0`
 
 ### Fixed
+- Template Cleanup: Escape GitHub username to avoid incorrect characters in class package name
+- Template Cleanup: Run `ktlintFormat` task to fix imports order
+- GitHub Actions: Use the correct property in the "Upload artifact" step
 
-### Security
 ## [0.8.0]
 ### Added
 - Dependabot integration
