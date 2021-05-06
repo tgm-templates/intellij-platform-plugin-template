@@ -4,7 +4,41 @@
 
 ## [Unreleased]
 ### Changed
+- Update `pluginVerifierIdeVersions` to `2020.2.4, 2020.3.4, 2021.1`
+- Update `pluginUntilBuild` to include `211.*` (2021.1.*)  
+- Dependencies (GitHub Actions) - upgrade `actions/cache` to `v2.1.5`
+- Upgrade Gradle Wrapper to `7.0`
+
+## [0.9.0]
+### Added
+- `properties` shorthand function for accessing `gradle.properties` in a cleaner way
+- Dependabot check for GitHub Actions used in [workflow files](.github/workflows)
+
+### Changed
+- Dependencies - upgrade `detekt-formatting from` to `1.16.0` 
+- Dependencies - upgrade `io.gitlab.arturbosch.detekt` to `1.16.0` 
+- Dependencies - upgrade `org.jetbrains.kotlin.jvm` to `1.4.32` 
+- Dependencies (GitHub Actions) - upgrade `actions/upload-artifact` to `v2.2.2`
+- Dependencies (GitHub Actions) - upgrade `actions/cache` to `v2.1.4`
+
+### Fixed
+- Fix `README.md` file resolution in the `build.gradle.kts`
+
+## [0.8.3]
+### Changed
+- Dependencies - upgrade `org.jetbrains.intellij` to `0.7.2`
+- Dependencies - upgrade `org.jlleitschuh.gradle.ktlint` to `10.0.0`
+- Update `platformVersion` to `2020.2.4` for compatibility with macOS Big Sur
+- Upgrade Gradle Wrapper to `6.8.3`
+
+## [0.8.2]
+### Changed
 - Use `-bin` distribution of the Gradle Wrapper
+- Upgrade Gradle Wrapper to `6.8.2`
+- Update `pluginVerifierIdeVersions` in `gradle.properties` files
+- Dependencies - upgrade `org.jetbrains.kotlin.jvm` to `1.4.30`
+- Dependencies - upgrade `org.jetbrains.changelog` to `1.1.1`
+- Configure the `changelog` Gradle plugin
 
 ## [0.8.1]
 ### Added
@@ -57,7 +91,7 @@
 - GitHub Actions - use hash based on `pluginVerifierIdeVersions` in `Setup Plugin Verifier IDEs Cache` step
 
 ### Changed
-- Use [Kotlin extension function](https://jetbrains.org/intellij/sdk/docs/basics/plugin_structure/plugin_services.html?search=servic#retrieving-a-service) to retrieve the `MyProjectService` in the `MyProjectManagerListener`
+- Use [Kotlin extension function](https://plugins.jetbrains.com/docs/intellij/plugin-services.html#retrieving-a-service) to retrieve the `MyProjectService` in the `MyProjectManagerListener`
 - Dependencies - upgrade `org.jetbrains.intellij` to `0.6.2`
 - Update `pluginVerifierIdeVersions` in the `gradle.properties` files
 
