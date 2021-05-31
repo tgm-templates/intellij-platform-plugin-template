@@ -3,11 +3,27 @@
 # IntelliJ Platform Plugin Template Changelog
 
 ## [Unreleased]
+## [0.10.1]
+### Added
+- Introduced `next` branch in the root repository to make `main` always a stable one
+
 ### Changed
-- Update `pluginVerifierIdeVersions` to `2020.2.4, 2020.3.4, 2021.1`
+- Dependencies (GitHub Actions) - upgrade `actions/cache` to `v2.1.6`
+- Trigger GitHub Actions `Build` workflows only on pushes to `main` branch or pull request to avoid duplicated checks
+
+## [0.10.0]
+### Changed
+- Remove reference to the `jcenter()` from Gradle configuration file
+- Update `pluginVerifierIdeVersions` to `2020.2.4, 2020.3.4, 2021.1.2`
 - Update `pluginUntilBuild` to include `211.*` (2021.1.*)  
+- Dependencies - upgrade `org.jetbrains.kotlin.jvm` to `1.5.10`
+- Dependencies - upgrade `detekt-formatting from` to `1.17.1`
+- Dependencies - upgrade `io.gitlab.arturbosch.detekt` to `1.17.1`
 - Dependencies (GitHub Actions) - upgrade `actions/cache` to `v2.1.5`
-- Upgrade Gradle Wrapper to `7.0`
+- Dependencies (GitHub Actions) - upgrade `actions/checkout` to `v2.3.4`
+- Dependencies (GitHub Actions) - upgrade `actions/upload-release-asset` to `v1.0.2`
+- Dependencies (GitHub Actions) - upgrade `actions/create-release` to `v1.1.4`
+- Upgrade Gradle Wrapper to `7.0.2`
 
 ## [0.9.0]
 ### Added
