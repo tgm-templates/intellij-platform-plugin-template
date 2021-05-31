@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# IntelliJ Platform Plugin Template Changelog
+# intellij-platform-plugin Changelog
 
 ## [Unreleased]
 ## [0.10.1]
@@ -240,7 +240,5 @@
 - Change pluginSinceBuild to 193
 
 ## [0.0.1]
-### Added
-- Initial project scaffold
-- GitHub Actions to automate testing and deployment
-- Kotlin support
+=======### Added
+- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)

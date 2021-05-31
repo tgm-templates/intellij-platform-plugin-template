@@ -1,1 +1,1 @@
-rootProject.name = "@pluginName@"
+rootProject.name = "intellij-platform-plugin"
